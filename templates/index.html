@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+  position: relative;
+}
+
+.chat-container {
+  max-height: calc(100vh - 180px); /* Adjust as needed */
+  overflow-y: auto;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.chat-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+
+.message-input-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.message-input {
+  width: calc(100% - 90px); /* Adjust as needed */
+  margin: 10px 0;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.send-button {
+  width: 80px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #45a049;
+}
+
+
+.typing-animation{
+    border: 1px solid red;
+}
+
+</style>
+</head>
+<body>
+  
+<h2>My Chat Bot</h2>
+
+<div class="chat-container" id="chatContainer">
+  <div class="container">
+    <img src="{{ url_for('static', filename='images/bot-logo.jpg') }}" alt="Avatar" style="width:100%;">
+    <p>Hello. How can I help you today ?</p>
+    <span class="time-right">11:00</span>
+  </div>
+
+<!-- Text Box for sending messages -->
+<div class="message-input-container">
+  <input type="text" id="userInput" class="message-input" placeholder="Type your message here...">
+  <button class="send-button" id="send-button">Send</button>
+</div>
+
+<script>
+
+// Adjust input box width when the window is resized
+window.addEventListener('resize', function() {
+  var containerWidth = document.querySelector('.chat-container').offsetWidth;
+  document.getElementById("userInput").style.width = containerWidth - 90 + 'px'; // 90px is the width of the send button
+});
+
+// Adjust input box width on initial load
+window.addEventListener('load', function() {
+  var containerWidth = document.querySelector('.chat-container').offsetWidth;
+  document.getElementById("userInput").style.width = containerWidth - 90 + 'px'; // 90px is the width of the send button
+});
+</script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
